@@ -1,0 +1,6 @@
+[submodule "module"]
+	path = module
+	url = git@github.com:Emb3rs-Project/p-business.git
+[submodule "ms-grpc"]
+	path = ms-grpc
+	url = git@github.com:Emb3rs-Project/ms-grpc.git
