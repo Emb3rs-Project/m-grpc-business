@@ -31,6 +31,7 @@ class BusinessModule(BusinessModuleServicer):
             Discountrate_socio=json.dumps(output["Discountrate_socio"]),
             Discountrate_business=json.dumps(output["Discountrate_business"]),
             LCOH_s=json.dumps(output["LCOH_s"]),
+            report=output["report"],
         )
 
     def internal_heat_recobery(self, request, context):
