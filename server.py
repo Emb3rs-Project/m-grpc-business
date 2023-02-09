@@ -1,15 +1,19 @@
 import json
 import os
 from concurrent import futures
+from pathlib import Path
 
 import dotenv
 import grpc
 import jsonpickle
+
+from base.wrappers import SimulationWrapper
 from business.business_pb2 import BMInput, BMOutput
 from business.business_pb2_grpc import BusinessModuleServicer, add_BusinessModuleServicer_to_server
 from module.Businessmodulev1_clean import BM as run_feasability  # noqa
 
 dotenv.load_dotenv()
+PROJECT_PATH = str(Path.cwd().parent)
 
 
 class BusinessModule(BusinessModuleServicer):
@@ -20,7 +24,8 @@ class BusinessModule(BusinessModuleServicer):
             "teo-module": jsonpickle.decode(request.teo_module),
             "market-module": jsonpickle.decode(request.market_module),
         }
-        output = run_feasability(input_dict=input_dict, generate_template=False)
+        with SimulationWrapper(project_path=PROJECT_PATH):
+            output = run_feasability(input_dict=input_dict, generate_template=False)
         return BMOutput(
             NPV_socio_economic=json.dumps(output["NPV_socio-economic"]),
             IRR_socio_economic=json.dumps(output["IRR_socio-economic"]),
