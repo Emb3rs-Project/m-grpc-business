@@ -44,7 +44,10 @@ class BusinessModule(BusinessModuleServicer):
 
 
 def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=100),
+        options=[('grpc.max_send_message_length', -1), ('grpc.max_receive_message_length', -1)],
+    )
     add_BusinessModuleServicer_to_server(BusinessModule(), server)
 
     server.add_insecure_port(f"{os.getenv('GRPC_HOST')}:{os.getenv('GRPC_PORT')}")
