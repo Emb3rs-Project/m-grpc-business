@@ -13,7 +13,7 @@ from business.business_pb2_grpc import BusinessModuleServicer, add_BusinessModul
 from module.Businessmodulev1_clean import BM as run_feasability  # noqa
 
 dotenv.load_dotenv()
-PROJECT_PATH = str(Path.cwd().parent)
+PROJECT_PATH = str(Path.cwd())
 
 
 class BusinessModule(BusinessModuleServicer):
@@ -45,7 +45,7 @@ class BusinessModule(BusinessModuleServicer):
 
 def serve():
     server = grpc.server(
-        futures.ThreadPoolExecutor(max_workers=100),
+        futures.ThreadPoolExecutor(max_workers=10),
         options=[('grpc.max_send_message_length', -1), ('grpc.max_receive_message_length', -1)],
     )
     add_BusinessModuleServicer_to_server(BusinessModule(), server)
