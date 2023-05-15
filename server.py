@@ -6,7 +6,6 @@ from pathlib import Path
 import dotenv
 import grpc
 import jsonpickle
-
 from base.wrappers import SimulationWrapper
 from business.business_pb2 import BMInput, BMOutput
 from business.business_pb2_grpc import BusinessModuleServicer, add_BusinessModuleServicer_to_server
@@ -45,7 +44,7 @@ class BusinessModule(BusinessModuleServicer):
 
 def serve():
     server = grpc.server(
-        futures.ThreadPoolExecutor(max_workers=100),
+        futures.ThreadPoolExecutor(max_workers=10),
         options=[('grpc.max_send_message_length', -1), ('grpc.max_receive_message_length', -1)],
     )
     add_BusinessModuleServicer_to_server(BusinessModule(), server)
