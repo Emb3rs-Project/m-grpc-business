@@ -5,18 +5,18 @@ channels:
 dependencies:
   - python=3.9
   - pip=
-  - colorama=
-  - numpy=
-  - pandas=
-  - geopy=
-  - pvlib-python=
-  - urllib3=
-  - beautifulsoup4=
-  - matplotlib=
-  - requests=
-  - pydantic=
-  - jsonpickle=
-  - mpld3=0.5.7
+  - colorama=0.*
+  - numpy=1.*
+  - pandas=1.*
+  - geopy=2.*
+  - urllib3=1.*
+  - beautifulsoup4=4*
+  - matplotlib=3.*
+  - requests=2.*
+  - pydantic=1.*
+  - jsonpickle=3.*
+  - mpld3=0.*
+  - numpy-financial=1.*
   - pip:
     - grpcio==1.44.0
     - protobuf==3.20.1
