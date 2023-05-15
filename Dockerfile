@@ -1,4 +1,6 @@
-FROM ghcr.io/emb3rs-project/embers-base:latest as build
+ARG BASE_TAG=latest
+
+FROM ghcr.io/emb3rs-project/embers-base:${BASE_TAG} as build
 
 # creating the environment
 COPY environment-py39.yml .
@@ -34,8 +36,10 @@ COPY . .
 
 ENV PYTHONPATH=ms-grpc/plibs:module
 
-EXPOSE 50051
+EXPOSE 50055
 
 SHELL [ "/bin/bash", "-c" ]
+RUN echo 'source /venv/bin/activate' >> ~/.bashrc && source ~/.bashrc
+
 ENTRYPOINT source /venv/bin/activate && \
     python -u server.py
